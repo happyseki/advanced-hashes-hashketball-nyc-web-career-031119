@@ -108,7 +108,26 @@ def player_stats(name)
   end
 end
 
-def big_shoe_rebounds()
+def big_shoe_rebounds
+ largest = 0
+ player = ""
+   game_hash.each do|team, contents|
+     contents.each do|contents, value|
+         if value.class == Hash
+          value.each do|name, v|
+             v.each do|k, num|
+              if k == :shoe
+                 if num > largest
+                  largest = num
+                  player = name
+                 end
+              end
+             end
+          end
+  return game_hash[team][contents][player][:rebounds]
+      end
+     end
+   end
 end
 # Write your code here!
 
